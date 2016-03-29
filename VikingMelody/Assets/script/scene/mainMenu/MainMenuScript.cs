@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MainMenuScript : MonoBehaviour {
-	public GameObject loadingScreen;
+//	public UILabel textLabel;
 	// Use this for initialization
 	void Start () {
 	
@@ -12,4 +12,18 @@ public class MainMenuScript : MonoBehaviour {
 	void Update () {
 	
 	}
+	public void onTestUnlock2(UILabel textLabel){
+		PlayerPrefs.SetInt("UnC",1);
+		PlayerPrefs.Save();
+		textLabel.text="Unlock complete";
+		Debug.Log(PlayerPrefs.GetInt("UnC"));
+	}
+
+	public void onResetGameState(UILabel textLabel){
+		PlayerPrefs.SetInt("UnC",0);
+		PlayerPrefs.Save();
+		textLabel.text="reset complete";
+		Debug.Log(PlayerPrefs.GetInt("UnC"));
+	}
+
 }

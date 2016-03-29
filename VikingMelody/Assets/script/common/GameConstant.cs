@@ -8,11 +8,16 @@ public class GameConstant {
 	private const float slideMiss =58.33f;
 	private const int perfectMultiplier=2;
 	private const float gameDuration =60f;
+	private const float delayGameDuration = 5f;
 
 	private const int easyScore = 200;
 	private const int normalScore = 300;
 	private const int hardScore = 500;
 	private const int HPIndexBegin = 3;
+
+	public float getDelayGameDuration(){
+		return delayGameDuration;
+	}
 
 	public float getGameDuration(){
 		return gameDuration;

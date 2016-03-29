@@ -3,71 +3,84 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class EnemyObjectScript : MonoBehaviour {
-	public List<GameObject>enemySign1;
-	public List<GameObject>enemySign2;
 	public GameObject mainGame;
-	public List<GameObject> auraEffectSelectionList;
 	public ParticleSystem boomEffect;
-	private GameManager gameManager=GameManager.getSingleton();
 	public ComboGenerator comboGeneratorMiss;
+	public List<GameObject> enemyCharacterList;
 
-//	private Dictionary<int,int>enemySignDict1=new Dictionary<int, int>();
-//	private Dictionary<int,int>enemySignDict2=new Dictionary<int, int>();
-	// Use this for initialization
-	void Start () {
+	private List<GameObject>activeEnemy;
+	private GameManager gameManager=GameManager.getSingleton();
 
+
+	public void initialEnemyObjectScript(){
+		//Debug.Log("initial active enemy");
+		if(activeEnemy==null){
+			activeEnemy=new List<GameObject>();
+		}
+		activeEnemy.Clear();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void onSetEnemy(){
+		//UnC=unlock character 
+		if(PlayerPrefs.GetInt("UnC")>0){
+			foreach(GameObject obj in enemyCharacterList){
+				obj.SetActive(false);
+			}
+			int random = Random.Range(0,PlayerPrefs.GetInt("UnC")+1);
+			//Debug.Log("Active enemy  "+enemyCharacterList[random]);
+			enemyCharacterList[random].SetActive(true);
+			activeEnemy.Add(enemyCharacterList[random]);
+			//Debug.Log("add active enemy.count "+activeEnemy.Count);
+			enemyCharacterList[random].GetComponent<EnemySignCreater>().onCreateSign();
+		}else{
+			enemyCharacterList[0].GetComponent<EnemySignCreater>().onCreateSign();
+		}
 	}
 
+	public void onCheckInputEnemy(int value,float sliderPos){
+		if(activeEnemy.Count>0){
+			//Debug.Log("check on enemy "+activeEnemy[0]);
+			if(activeEnemy[0].GetComponent<EnemySignCreater>().onCheckSign(value,sliderPos)){
+			}
+		}
+	}
+		
 	public void destroyEnemy(){
 		if(gameObject.activeInHierarchy){
-			foreach(GameObject effect in auraEffectSelectionList){
-				effect.SetActive(false);
+			foreach(GameObject effect in enemyCharacterList){
+				effect.GetComponent<EnemySignCreater>().onDestroyEffect();
 			}
+			comboGeneratorMiss.transform.position=gameObject.transform.position;
 			comboGeneratorMiss.createEffect(HitType.MISS);
 			gameObject.SetActive(false);
 			Debug.Log(gameObject+" MISS !!");
-			gameManager.getEnemyList().RemoveRange(0,2);
+			activeEnemy[0].GetComponent<EnemySignCreater>().onDestroyEnemy();
+			activeEnemy.RemoveAt(0);
 			gameManager.setIsFirst(true);
 			gameObject.GetComponentInParent<EnemyGenerator>().getUsingEnemyList().RemoveAt(0);
-			mainGame.GetComponent<MainGame>().getGenaratorOrderList().RemoveAt(0);
+			gameManager.getGeneratorOrderList().RemoveAt(0);
 			mainGame.GetComponent<MainGame>().HPgenerator.onDestroyHP();
+		}
+	}
+
+	public void onResetEffect(){
+		foreach(GameObject effect in enemyCharacterList){
+			effect.GetComponent<EnemySignCreater>().onDestroyEffect();
 		}
 	}
 
 	public void onActiveDestroy(){
 		boomEffect.transform.position=gameObject.transform.position;
 		boomEffect.Play();
-	//	Debug.Log(gameObject+"    active destroy!!!!!    "+boomEffect.isPlaying);
+		//	Debug.Log(gameObject+"    active destroy!!!!!    "+boomEffect.isPlaying);
 		gameObject.SetActive(false);
-		gameManager.getEnemyList().RemoveRange(0,2);
+		activeEnemy[0].GetComponent<EnemySignCreater>().onDestroyEnemy();
+		activeEnemy.RemoveAt(0);
 		//boomEffect.Play();
 	}
-
-	public void setEnemySign(){
-		//set position1
-		int position1 = Random.Range(0,enemySign1.Count);
-		foreach(GameObject enemySing1OBJ in enemySign1){
-			enemySing1OBJ.SetActive(false);
-		}
-		enemySign1[position1].SetActive(true);
-		gameManager.addEnemyList(position1);
-
-		//set position2
-		int position2 = Random.Range(0,enemySign2.Count);
-		foreach(GameObject enemySing2OBJ in enemySign2){
-			enemySing2OBJ.SetActive(false);
-		}
-		enemySign2[position2].SetActive(true);
-		gameManager.addEnemyList(position2);
-	
+		
+	public GameObject getAuraEffectSelectionList(int index){
+		return enemyCharacterList[index].GetComponent<EnemySignCreater>().getAuraInChild(index);
 	}
 
-	public List<GameObject> getAuraEffectSelectionList(){
-		return auraEffectSelectionList;
-	}
 }

@@ -188,6 +188,8 @@
      <Compile Include="Assets\script\common\SetUnActiveOBJ.cs" />
      <Compile Include="Assets\script\generator\EnemyGenerator.cs" />
      <Compile Include="Assets\script\generator\EnemyObjectScript.cs" />
+     <Compile Include="Assets\script\generator\EnemyProperties.cs" />
+     <Compile Include="Assets\script\generator\EnemySignCreater.cs" />
      <Compile Include="Assets\script\generator\HitPointGenerator\HitPointGenerator.cs" />
      <Compile Include="Assets\script\scene\mainGame\ButtonInputProperties.cs" />
      <Compile Include="Assets\script\scene\mainGame\ComboGenerator.cs" />
@@ -196,15 +198,18 @@
      <Compile Include="Assets\script\scene\mainGame\ResultScript.cs" />
      <Compile Include="Assets\script\scene\mainMenu\MainMenuScript.cs" />
      <Compile Include="Assets\script\scene\mainMenu\SceneButtonScript.cs" />
+     <Compile Include="Assets\script\scene\mapSelection\CharacterProperties.cs" />
      <Compile Include="Assets\script\scene\mapSelection\CharacterSelection.cs" />
      <Compile Include="Assets\script\scene\mapSelection\InitialMapSelection.cs" />
      <Compile Include="Assets\script\scene\mapSelection\StageProperties.cs" />
+     <Compile Include="Assets\script\tools\EditorToolScript.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.9.2.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 1.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
+     <None Include="Assets\Resources\GameLevelData\GameLevel.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />

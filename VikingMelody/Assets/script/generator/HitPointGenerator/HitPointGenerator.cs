@@ -8,7 +8,6 @@ public class HitPointGenerator : MonoBehaviour {
 	private GameManager gameManager;
 
 	public GameObject HitpointLabel;
-	public List<GameObject> CharacterHP;
 	public GameObject HpObjectParent;
 	public GameObject HpObjectChild;
 	private int hpTemp;
@@ -41,7 +40,8 @@ public class HitPointGenerator : MonoBehaviour {
 	public void createHP(){
 		posX= -40f;
 		HitpointLabel.SetActive(true);
-		for(int i =0;i<CharacterHP.Count;i++){
+
+		for(int i =0;i<gameManager.getCharacterSelectedList().Count;i++){
 		GameObject obj =  NGUITools.AddChild(gameObject,HpObjectParent);
 		obj.name = HpObjectParent.name+"_BeatPooler   "+i  ;
 			//obj.transform.localPosition= new Vector2(0,posY);
@@ -51,12 +51,7 @@ public class HitPointGenerator : MonoBehaviour {
 		//	posY +=(-20);
 		}
 	}
-
-
-	public List<GameObject> getCharacterList(){
-		return CharacterHP;
-	}
-
+		
 	public void createHPIndex(GameObject parent, GameObject child){
 		for(int i =0;i < gameManager.getGameConstant().getHPIndex();i++){
 			GameObject obj =  NGUITools.AddChild(parent,child);
@@ -78,7 +73,7 @@ public class HitPointGenerator : MonoBehaviour {
 			HitPointIndexList[HitPointIndexList.Count-hpTemp].SetActive(false);
 			if(HitPointIndexList.Count-hpTemp==0){
 				Debug.Log("GAME OVER");
-				gameManager.setIsStartGame(false);
+				gameManager.isStartGame=false;
 				gameManager.setIsGameOver(true);
 
 			}

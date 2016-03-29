@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Level mean level of stage 
+SongName mean name os song each stage
+EnemyFrequency mean how namy enemy fall per secs
+BPM mean song's bpm
+MaxSigns mean max number of enemy's signs has fall each 
+-->
+<Stage>
+  <Level level="1" enemyFrequency="5" bpm="160" maxSigns="5" SongName="sound_bg">
+  </Level>
+  <Level level="2" enemyFrequency="4" bpm="150" maxSigns="4" SongName="sound_bg">
+  </Level>
+</Stage>

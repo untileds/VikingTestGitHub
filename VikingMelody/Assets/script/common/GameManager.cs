@@ -17,20 +17,80 @@ public enum HitType{
 }
 
 public class GameManager{
+
+	public bool isGenaratable = true;
 	public bool isStartGame=false;
 	public bool isFinish=false;
+	public bool isWinGame=false;
 	public List<int> enemyList = new List<int>();
+	public List<string>removeEnemyList = new List<string>();
 
+	private List<int> generatorOrderList = new List<int>();
+	private List<string>characterSelectedList = new List<string>();
+	private int selectIndex =0;
 	private int perfectCount=0;
 	private static GameManager gameManager;
 	private GameConstant gameConstant;
 	private GameLevel gameLevel = GameLevel.NONE;
 	private bool isGameOver=false;
 	private bool isFirst =true;
-	private int stageNumber=PlayerPrefs.GetInt("Sn");
-	private int unlockedStage=PlayerPrefs.GetInt("UnS");
+	private int stageNumber=0;
+	private int unlockedStage=0;
+	private int slideBarWidth=0;
+	private int gameScore=0;
+
+
+	public void addGameScore(int value){
+		gameScore+=value;
+	}
+
+	public int getGameScore(){
+		return gameScore;
+	}
+
+	public void resetScore(){
+		gameScore=0;
+	}
+
+	public void onSetSlideBarWidth(int value){
+		slideBarWidth=value;
+	}
+
+	public int getSlideWidth(){
+		return slideBarWidth;
+	}
+
+	public List<int> getGeneratorOrderList(){
+		return generatorOrderList;
+	}
+
+	public void resetGeneratorOrderList(){
+		generatorOrderList.Clear();
+	}
+
+	public int getSelectIndex(){
+		Debug.Log("index "+selectIndex);
+		return selectIndex;
+	}
+
+	public void increaseSelectIndex(){
+		selectIndex++;
+	}
+
 	public void setStage(int stage){
 		stageNumber=stage;	
+	}
+
+	public List<string> getCharacterSelectedList(){
+		return characterSelectedList;
+	}
+
+	public void addCharacterListByName(string name){
+		characterSelectedList.Add(name);
+	}
+
+	public void resetCharacterSelectedList(){
+		characterSelectedList.Clear();
 	}
 	public int getCurrentStage(){
 		Debug.Log("current stage "+stageNumber);
@@ -43,7 +103,7 @@ public class GameManager{
 
 	public void unlockNextStage(){
 		//UnS unlocked stage
-		unlockedStage+=1;
+		unlockedStage++;
 		Debug.Log("unlock stage "+unlockedStage);
 		PlayerPrefs.SetInt("UnS",unlockedStage);
 		PlayerPrefs.Save();
@@ -84,8 +144,9 @@ public class GameManager{
 		return gameLevel;
 	}
 
-	public void resetEnemyList(){
+	public void resetEnemyDict(){
 		enemyList.Clear();
+		removeEnemyList.Clear();
 	}
 
 	public List<int> getEnemyList(){
@@ -105,14 +166,18 @@ public class GameManager{
 		}
 		return gameConstant;
 	}
-
-	public void setIsStartGame(bool status){
-		isStartGame=status;
-	}
-
-	public void addEnemyList(int position){
+		
+	public void addEnemyList(string name,int position){
 		//Debug.Log("Add  position "+position);
 		enemyList.Add(position);
+		removeEnemyList.Add(name);
+	}
+
+	public void onRemoveEnemy(){
+		//Debug.Log("Remove enemy "+removeEnemyList[0]+" value position "+enemyList[0]);
+		enemyList.RemoveAt(0);
+		removeEnemyList.RemoveAt(0);
+
 	}
 
 	public int getScoreByGameLevel(){

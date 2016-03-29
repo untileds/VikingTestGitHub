@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scene/CharacterSelection.unity
+- path: Assets/scene/StageEditor/GameEditorTools.unity
   isLoaded: 1
   isActive: 1

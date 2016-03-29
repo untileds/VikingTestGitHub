@@ -4,25 +4,19 @@ using System.Collections.Generic;
 
 public class EnemyGenerator : MonoBehaviour {
 	public GameObject enemyLine;
-	private List<GameObject> enemyList;
-	private List<GameObject> usingEnemyList;
-	private List<GameObject> pauseEnemyList;
+	private List<GameObject> enemyList =new List<GameObject>();
+	private List<GameObject> usingEnemyList = new List<GameObject>();
+	private List<GameObject> pauseEnemyList = new List<GameObject>();
 	int objNumber;
 
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public GameObject getEnemyLine(){
+		return enemyLine;
 	}
 
 	public void initialGenerator(){
-		enemyList = new List<GameObject>();
-		usingEnemyList = new List<GameObject>();
-		pauseEnemyList = new List<GameObject>();
+		enemyList.Clear();
+		usingEnemyList.Clear();
+		pauseEnemyList.Clear();
 		objNumber=0;
 	}
 
@@ -37,32 +31,20 @@ public class EnemyGenerator : MonoBehaviour {
 	//	Debug.Log("restart usingEnemyList "+usingEnemyList.Count+"  pauseEnemyList"+pauseEnemyList.Count);
 	}
 
-	public void onSetSelectionEffect(int index){
-		if(usingEnemyList[0].activeInHierarchy){
-			usingEnemyList[0].GetComponent<EnemyObjectScript>().getAuraEffectSelectionList()[index].SetActive(true);
-		}
-	}
-
-	public void onResetEffect(){
-		for(int i=0;i<enemyList.Count;i++){
-			foreach(GameObject effect in enemyList[i].GetComponent<EnemyObjectScript>().getAuraEffectSelectionList()){
-				effect.SetActive(false);
-			}
-		}
-	}
-
 	public void creatEnemy(){
 		//Debug.Log (gameObject.name+"position"+gameObject.transform.position);
 		GameObject enemyTemp = enemyPooler(gameObject.transform.position);
 
-		enemyTemp.GetComponent<EnemyObjectScript>().setEnemySign();
+		enemyTemp.GetComponent<EnemyObjectScript>().onSetEnemy();
 	}
 
 	private GameObject enemyPooler(Vector3 position){
-		//Debug.Log(gameObject+" enemyList.Count is "+enemyList.Count);
+		Debug.Log(gameObject+" generator position "+position);
 		for (int i = 0; i< enemyList.Count;i++){
 			if(!enemyList[i].activeInHierarchy){
 				enemyList[i].transform.position = position;
+				enemyList[i].GetComponent<TweenScale>().ResetToBeginning();
+				enemyList[i].GetComponent<TweenScale>().PlayForward();
 				enemyList[i].SetActive(true);
 				usingEnemyList.Add(enemyList[i]);
 				//Debug.Log("usingEnenmyList  is  "+usingEnemyList.Count);
@@ -72,25 +54,20 @@ public class EnemyGenerator : MonoBehaviour {
 			//Debug.Log (gameObject+"  i is "+i+" objNum is "+objNumber);
 		}
 		GameObject obj =  NGUITools.AddChild(gameObject,enemyLine);
+		obj.GetComponent<EnemyObjectScript>().initialEnemyObjectScript();
 		//obj.transform.localScale = new Vector3(0.003472f,0.003472f,1f);
-		obj.name = enemyLine.name+"_BeatPooler   "+objNumber  ;
+		obj.name = enemyLine.name+"_Pooler   "+objNumber  ;
 		obj.SetActive(true);
 		enemyList.Add (obj);
+		Debug.Log("enemy pooler body pos"+ obj.GetComponent<Animator>().deltaPosition);
 		//Debug.Log("usingEnenmyList(new)  is  "+usingEnemyList.Count);
 		usingEnemyList.Add(obj);
 		return obj;
 
 	}
 
-	public void destroyActiveEnemy(){
-	
-		if(usingEnemyList[0].activeInHierarchy){
-			//usingEnemyList[0].SetActive(false);
-			//usingEnemyList[0].GetComponent<EnemyObjectScript>().boomEffect.Play();
-		//	Debug.Log("enemy "+usingEnemyList[0].name+"  is destroying");
-			usingEnemyList[0].GetComponent<EnemyObjectScript>().onActiveDestroy();
-			usingEnemyList.RemoveAt(0);
-		}
+	public List<GameObject> getUsingEnemyList(){
+		return usingEnemyList;
 	}
 
 	public void pauseEnemy(){
@@ -108,10 +85,13 @@ public class EnemyGenerator : MonoBehaviour {
 		}
 		pauseEnemyList.Clear();
 	}
+		
+	public void onCheckEnemyInput(int value,float sliderPos){
+		//Debug.Log("check input "+gameObject+" using enemyList "+usingEnemyList[0]);
+		usingEnemyList[0].GetComponent<EnemyObjectScript>().onCheckInputEnemy(value,sliderPos);
+			//onSetSelectionEffect(value);
+			//usingEnemyList.RemoveAt(0);
 
-
-	public List<GameObject> getUsingEnemyList(){
-		return usingEnemyList;
 	}
-}
 
+}
