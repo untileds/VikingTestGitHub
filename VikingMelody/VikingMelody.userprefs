@@ -2,18 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\tools\EditorToolScript.cs">
     <Files>
+      <File FileName="Assets\script\tools\EditorToolScript.cs" Line="69" Column="31" />
       <File FileName="Assets\script\common\GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets\script\scene\mainGame\MainGame.cs" Line="1" Column="1" />
       <File FileName="Assets\script\generator\EnemyGenerator.cs" Line="1" Column="1" />
-      <File FileName="..\..\imReactor_v2\client\Assets\script\utility\GameUtility.cs" Line="1" Column="1" />
       <File FileName="Assets\script\generator\EnemyObjectScript.cs" Line="1" Column="1" />
       <File FileName="Assets\script\generator\HitPointGenerator\HitPointGenerator.cs" Line="1" Column="1" />
       <File FileName="Assets\script\scene\mapSelection\CharacterSelection.cs" Line="1" Column="1" />
-      <File FileName="..\..\Fairy soul beta\FairyPro\prototype\Assets\script\tools\EditorScript.cs" Line="815" Column="46" />
-      <File FileName="Assets\script\tools\EditorToolScript.cs" Line="111" Column="58" />
-      <File FileName="..\..\Fairy soul beta\FairyPro\prototype\Assets\script\scene\gamePlay\MainGame.cs" Line="163" Column="39" />
-      <File FileName="..\..\Fairy soul beta\FairyPro\prototype\Assets\script\Song&amp;Note\NotePattern.cs" Line="11" Column="24" />
-      <File FileName="..\..\Fairy soul beta\FairyPro\prototype\Assets\script\Song&amp;Note\SongPattern.cs" Line="17" Column="67" />
       <File FileName="Assets\script\scene\mainGame\ComboGenerator.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

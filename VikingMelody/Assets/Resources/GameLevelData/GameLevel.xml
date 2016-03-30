@@ -6,8 +6,6 @@ BPM mean song's bpm
 MaxSigns mean max number of enemy's signs has fall each 
 -->
 <Stage>
-  <Level level="1" enemyFrequency="5" bpm="160" maxSigns="5" SongName="sound_bg">
-  </Level>
-  <Level level="2" enemyFrequency="4" bpm="150" maxSigns="4" SongName="sound_bg">
+  <Level level="2" enemyFrequency="3" bpm="140" maxSigns="3" SongName="sound_bg5555" unlockCharacter="1">
   </Level>
 </Stage>
