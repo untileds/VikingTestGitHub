@@ -6,6 +6,14 @@ BPM mean song's bpm
 MaxSigns mean max number of enemy's signs has fall each 
 -->
 <Stage>
-  <Level level="2" enemyFrequency="3" bpm="140" maxSigns="3" SongName="sound_bg5555" unlockCharacter="1">
+  <Level level="1" enemyFrequency="1" bpm="140" maxSigns="2" SongName="guitar_sound_1_cut" unlockCharacter="0">
+  </Level>
+  <Level level="2" enemyFrequency="2" bpm="145" maxSigns="2" SongName="guitar_sound_1_cut" unlockCharacter="0">
+  </Level>
+  <Level level="3" enemyFrequency="2" bpm="150" maxSigns="3" SongName="guitar_sound_1_cut" unlockCharacter="0">
+  </Level>
+  <Level level="4" enemyFrequency="3" bpm="155" maxSigns="3" SongName="guitar_sound_1_cut" unlockCharacter="1">
+  </Level>
+  <Level level="5" enemyFrequency="3" bpm="160" maxSigns="3" SongName="Volcano4" unlockCharacter="1">
   </Level>
 </Stage>
